@@ -60,7 +60,8 @@ There are many algorithms and techniques that can be used to solve this problem,
 - **`Initialize the MLFQ (sched_init_MLFQ)`**: 
 - **`Handle the Scheduler (fos_scheduler)`**:
 
+## Conclusion
 
+The FOS simulator provides a comprehensive platform to explore and understand various aspects of operating system functionality. By implementing key features such as the Kernel Heap, Fault Handler with Nth Chance Clock, and CPU Scheduling with MLFQ, FOS demonstrates effective strategies for managing memory and CPU resources. The chosen algorithms and techniques address critical challenges like memory management and CPU utilization, optimizing performance, and ensuring efficient operation. The figures included offer visual insights into how these systems work, aiding in the understanding of complex concepts and implementations.
 
-1. Initialize the MLFQ (sched_init_MLFQ)
-2. Handle the Scheduler (fos_scheduler)
+With these implementations, FOS not only simulates core OS functionalities but also serves as a valuable tool for testing and evaluating operating system behaviors and performance under various conditions.
