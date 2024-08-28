@@ -26,6 +26,9 @@ To overcome this limitation, the one-to-one mapping is replaced with an ordinary
 
 [Kernel Heap Mapping]![image](https://github.com/user-attachments/assets/0eb19c74-dc06-47a5-8310-045cb8eb2538))
 
+**File Path**
+  FOS_PROJECT/kern/kheap.c
+
 ### 2. Fault Handler
 
 **Problem:**
