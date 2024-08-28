@@ -1,0 +1,7 @@
+*.elf
+fos.elf
+fos.bin
+*.o
+*.d
+/bochs.log
+/obj
