@@ -46,6 +46,9 @@ We will allocate a new page in the main memory for the faulted page. Then, load 
 - **`Placement()`**: 
 - **`RePlacement()`**:
 
+**file path**
+  kern/trap.c
+
 ### 3. CPU Scheduling by MLFQ
 
 **Problem:**
@@ -63,6 +66,9 @@ There are many Algorithms and techniques that can used to solve this problem lik
 
 - **`Initialize the MLFQ (sched_init_MLFQ)`**: 
 - **`Handle the Scheduler (fos_scheduler)`**:
+
+**file path**
+  kern/sched.c
 
 ## Conclusion
 
