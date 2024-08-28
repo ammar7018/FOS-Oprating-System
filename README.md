@@ -1,58 +1,66 @@
-\documentclass{article}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{hyperref}
+# FOS: Operating System Simulator
 
-\title{FOS: Operating System Simulator}
-\author{}
-\date{}
+FOS is an operating system simulator that demonstrates how an OS manages memory, CPU scheduling, threads, and file systems using data structures like linked lists and algorithms like LRU and Round Robin. It is designed to perform OS tasks efficiently and achieve great performance and speed, with all operations completed within just a few milliseconds during testing.
 
-\begin{document}
+## Implementations
 
-\maketitle
+### 1. Kernel Heap
 
-\section*{Introduction}
+**Problem:**
 
-\textbf{FOS} (Operating System Simulator) is a powerful tool designed to emulate the core functionalities of an operating system. It showcases how an OS manages crucial aspects such as memory, CPU scheduling, threads, and file systems. By utilizing advanced data structures like linked lists and implementing algorithms such as Least Recently Used (LRU) and Round Robin, FOS achieves remarkable efficiency. During testing, FOS demonstrated exceptional performance, completing all operations within just a few milliseconds.
+The kernel virtual space `[KERNEL_BASE, 4 GB)` is currently one-to-one mapped to the physical memory `[0, 256 MB)`. This restricts the kernel's use of physical memory to just 256 MB. As a result, the kernel cannot utilize any physical memory beyond the 256 MB limit.
 
-\section*{Implemented Features}
+**Solution:**
 
-The following sections describe key features implemented in FOS, highlighting how they contribute to the overall efficiency and effectiveness of the operating system.
+To overcome this limitation, the one-to-one mapping is replaced with an ordinary mapping, similar to how user space allocation is handled. This change allows the kernel to allocate frames anywhere in physical memory and access them by storing the frame number in the kernel's page table.
 
-\subsection*{1. Kernel Heap Management}
+**Functions:**
 
-\paragraph{Problem Description:}
-In the initial design, the kernel virtual space \([KERNEL\_BASE, 4 \, \text{GB})\) was one-to-one mapped to the physical memory range \([0, 256 \, \text{MB})\). This configuration severely limited the kernel's ability to utilize physical memory beyond 256 MB, restricting its operations and scalability. Specifically, the kernel code could not access or use any physical memory located after the 256 MB boundary, which posed significant limitations for memory-intensive tasks.
+- **`Kmalloc()`**: Dynamically allocates a space of the specified size using the NEXT FIT and Best Fit strategies and maps it to memory as illustrated in the figure below.
 
-\paragraph{Proposed Solution:}
-To overcome this constraint, the one-to-one mapping approach was replaced with a more flexible, ordinary mapping strategy, akin to the method used for allocating user space. This adjustment allows the kernel to allocate memory frames across the entire physical memory space, irrespective of their location. The kernel can then access these frames by storing their frame numbers in the kernel's page table, ensuring seamless memory management and eliminating the previous 256 MB limitation.
+- **`Kfree()`**: Frees a previously allocated space by removing all its pages from the Kernel Heap.
 
-\paragraph{Functions Implemented:}
-The kernel heap management in FOS is enhanced by implementing the following key functions:
+- **`kheap_virtual_address()`**: Retrieves the kernel virtual address corresponding to a given physical address.
 
-\begin{itemize}
-    \item \textbf{Kmalloc():} 
-    This function dynamically allocates memory of a specified size using the NEXT FIT strategy, which efficiently finds free space by scanning from the last allocated block. The allocated space is then mapped to the virtual memory, allowing the kernel to use it as required. The process is visually depicted in Figure~\ref{fig:kmalloc}, demonstrating the memory mapping and allocation steps.
+- **`kheap_physical_address()`**: Retrieves the physical address corresponding to a given kernel virtual address.
 
-    \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{path/to/your/image.png}
-    \caption{Memory allocation and mapping using Kmalloc. The NEXT FIT strategy ensures efficient space utilization.}
-    \label{fig:kmalloc}
-    \end{figure}
+[Kernel Heap Mapping]![image](https://github.com/user-attachments/assets/0eb19c74-dc06-47a5-8310-045cb8eb2538))
 
-    \item \textbf{Kfree():}
-    This function is responsible for freeing previously allocated memory. It does so by removing all pages associated with the allocated space from the Kernel Heap. This ensures that memory is properly managed and that no resources are wasted by holding onto unused memory.
+### 2. Fault Handler
 
-    \item \textbf{kheap\_virtual\_address():}
-    This function retrieves the kernel virtual address corresponding to a given physical address. It is essential for the kernel to translate between physical and virtual addresses accurately, ensuring correct memory access and management.
+**Problem:**
 
-    \item \textbf{kheap\_physical\_address():}
-    This function performs the inverse operation of \texttt{kheap\_virtual\_address()}, converting a given kernel virtual address back to its corresponding physical address. This is crucial for tasks that require direct manipulation of physical memory, such as device drivers or low-level system operations.
-\end{itemize}
+When a process needs a file that is not in its working set, the CPU handles this case by determining if there is space in the working set or if it needs to select a page for removal based on the algorithm implemented in our project (Nth Chance Clock). The MMU assists the OS by handling the fault and loading the required page from disk (such as a swap file or a memory-mapped file) into RAM. The figure below explains the process in more detail.
 
-\section*{Conclusion}
+**solution**
 
-The implementation of the Kernel Heap in FOS exemplifies how an operating system can efficiently manage memory in a constrained environment. By adopting a flexible mapping strategy and implementing key memory management functions, FOS ensures that the kernel can operate effectively, regardless of physical memory limitations. This, along with other features like CPU scheduling and thread management, makes FOS a highly performant and versatile operating system simulator.
+We will allocate a new page in the main memory for the faulted page. Then, load the faulted page back into the main memory from the page file, if the page exists. Otherwise (for new pages), add it to the page file (for new stack pages only). This process will be carried out if there is space in the working set. If the process exceeds the working set size, we will need to replace pages by applying the Nth Chance Clock algorithm.
 
-\end{document}
+Steps
+
+
+**Functions:**
+
+- **`Placement()`**: 
+- **`RePlacement()`**:
+
+### 3. CPU Scheduling by MLFQ
+
+**Problem:**
+
+Many processes need to use the CPU, and various problems can arise if we don't manage CPU utilization effectively. For example, starvation occurs when a process uses the CPU for an extended period without considering other shorter processes, which negatively affects user experience.
+
+**solution**
+
+There are many algorithms and techniques that can be used to solve this problem, such as applying Round Robin (RR), Shortest Remaining Time, or Multi-Level Feedback Queue (MLFQ). Each algorithm has its drawbacks. For example, RR can produce poor results for I/O-bound processes, lead to inefficient use of I/O devices, and increase the variance in response times. You should implement the algorithm that is most suitable for your needs, so we will use MLFQ. The figure will demonstrate how it works.
+
+
+**Functions:**
+
+- **`Initialize the MLFQ (sched_init_MLFQ)`**: 
+- **`Handle the Scheduler (fos_scheduler)`**:
+
+
+
+1. Initialize the MLFQ (sched_init_MLFQ)
+2. Handle the Scheduler (fos_scheduler)
