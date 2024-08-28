@@ -53,8 +53,7 @@ Many processes need to use the CPU, and various problems can arise if we don't m
 
 There are many algorithms and techniques that can be used to solve this problem, such as applying Round Robin (RR), Shortest Remaining Time, or Multi-Level Feedback Queue (MLFQ). Each algorithm has its drawbacks. For example, RR can produce poor results for I/O-bound processes, lead to inefficient use of I/O devices, and increase the variance in response times. You should implement the algorithm that is most suitable for your needs, so we will use MLFQ. The figure will demonstrate how it works.
 
-
-
+[MLFQ]![image](https://github.com/user-attachments/assets/a11b33a4-044e-49e6-9f3b-f30d368d8902)
 
 **Functions:**
 
