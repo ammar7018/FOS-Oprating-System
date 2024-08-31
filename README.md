@@ -80,4 +80,5 @@ With these implementations, FOS not only simulates core OS functionalities but a
 - [Ammar Hassan](https://www.linkedin.com/in/ammar-hassan-5a16551a1/)
 - [Youssef El-Deeb](https://www.linkedin.com/in/youssef-eldeeb-1a4269253/)
 - [Nadine El-Kady](https://www.linkedin.com/in/nadine-elkady-4b45792b1/)
+- [Reem Tarek](https://www.linkedin.com/in/reem-mohamed-66633124a/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 
