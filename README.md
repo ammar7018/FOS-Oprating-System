@@ -33,7 +33,7 @@ To overcome this limitation, the one-to-one mapping is replaced with an ordinary
 
 **Problem:**
 
-When a process needs a file that is not in its working set the OS handles this case by selecting what will be removed based on Algorthim that is implemented, In our project, we implement (Nth chance clock) if there is space in the working set we don't need to remove any page, The MMU helps the OS by handling the fault by loading the required page from disk (such as a swap file or a memory-mapped file) into RAM, the figure will explain the process in more details.
+When a process needs a file that is not in its working set the OS handles this case by selecting what will be removed based on Algorthim that is implemented, In our project, we implement (Nth chance clock). Note if there is space in the working set we don't need to remove any page, The MMU helps the OS by handling the fault by loading the required page from disk (such as a swap file or a memory-mapped file) into RAM, the figure will explain the process in more detail.
 
 [page fault]![image](https://github.com/user-attachments/assets/fd6334ee-a4c0-4d8c-b45c-726e1be11581)
 
