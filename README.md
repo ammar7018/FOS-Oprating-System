@@ -33,7 +33,7 @@ To overcome this limitation, the one-to-one mapping is replaced with an ordinary
 
 **Problem:**
 
-When a process needs a file that is not in its working set the OS handles this case by selecting what will be removed based on Algorthim that is implemented in our project we implement (Nth chance clock) if there are space in working set we don't need to remove any page, The MMU helps the OS by handling the fault by loading the required page from disk (such as a swap file or a memory-mapped file) into RAM, the figure will explain the process in more details.
+When a process needs a file that is not in its working set the OS handles this case by selecting what will be removed based on Algorthim that is implemented, In our project, we implement (Nth chance clock) if there is space in the working set we don't need to remove any page, The MMU helps the OS by handling the fault by loading the required page from disk (such as a swap file or a memory-mapped file) into RAM, the figure will explain the process in more details.
 
 [page fault]![image](https://github.com/user-attachments/assets/fd6334ee-a4c0-4d8c-b45c-726e1be11581)
 
@@ -57,7 +57,7 @@ Many processes need to use the CPU, and various problems can arise if we don't m
 
 **solution**
 
-There are many Algorithms and techniques that can used to solve this problem like applying RR, Shortest Remaining Time, or MLFQ. Each algorithm has its drawbacks. For example, RR can produce poor results for I/O-bound processes, lead to increase the variance in response times. You should implement the algorithm that is suitable for your needs, so we will use MLFQ. The figure will show how it works.
+There are many Algorithms and techniques that can used to solve this problem like applying RR, Shortest Remaining Time, or MLFQ. Each algorithm has its drawbacks. For example, RR can produce poor results for I/O-bound processes, leading to an increase in the variance in response times. You should implement the algorithm that is suitable for your needs, so we will use MLFQ. The figure will show how it works.
 
 
 [MLFQ]![image](https://github.com/user-attachments/assets/a11b33a4-044e-49e6-9f3b-f30d368d8902)
