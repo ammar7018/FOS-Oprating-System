@@ -12,7 +12,7 @@ The kernel virtual space `[KERNEL_BASE, 4 GB)` is currently one-to-one mapped to
 
 **Solution:**
 
-To overcome this limitation, the one-to-one mapping is replaced with an ordinary mapping, similar to how user space allocation is handled. This change allows the kernel to allocate frames anywhere in physical memory and access them by storing the frame number in the kernel's page table.
+To overcome this limitation, the one-to-one mapping is replaced with an ordinary mapping, similar to how user space allocation is handled (using page directory and page table more details in figure). This change allows the kernel to allocate frames anywhere in physical memory and access them by storing the frame number in the kernel's page table.
 
 **Functions:**
 
